@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function f_mpi_compile() {
+    THIS_FUNC_NAME=${FUNCNAME[0]}
     case "$#" in
     1)
         NAME_TEMP=$(echo "$1" | cut -d'.' -f1).out
@@ -8,7 +9,9 @@ function f_mpi_compile() {
     2)
         NAME_TEMP="$2"
         ;;
-    \?) return 1 ;;
+    \?)
+        printf "usage: %s source-file [output-file]\n" "${THIS_FUNC_NAME}"
+        ;;
     esac
 
     module load openmpi/2.1.6
@@ -17,6 +20,7 @@ function f_mpi_compile() {
 }
 
 function f_omp_compile() {
+    THIS_FUNC_NAME=${FUNCNAME[0]}
     case "$#" in
     1)
         NAME_TEMP=$(echo "$1" | cut -d'.' -f1).out
@@ -24,7 +28,9 @@ function f_omp_compile() {
     2)
         NAME_TEMP="$2"
         ;;
-    \?) return 1 ;;
+    \?)
+        printf "usage: %s source-file [output-file]\n" "${THIS_FUNC_NAME}"
+        ;;
     esac
 
     module load gcc/5.5.0
@@ -33,6 +39,7 @@ function f_omp_compile() {
 }
 
 function f_mpi_omp_compile() {
+    THIS_FUNC_NAME=${FUNCNAME[0]}
     case "$#" in
     1)
         NAME_TEMP=$(echo "$1" | cut -d'.' -f1).out
@@ -40,7 +47,10 @@ function f_mpi_omp_compile() {
     2)
         NAME_TEMP="$2"
         ;;
-    \?) return 1 ;;
+    \?)
+        printf "usage: %s source-file [output-file]\n" "${THIS_FUNC_NAME}"
+        return 1
+        ;;
     esac
 
     module load gcc/5.5.0 openmpi/2.1.6
@@ -62,12 +72,12 @@ function f_generate_file() {
         printf "usage: %s [-j job-name] [-n number-proc]\n" "${THIS_FUNC_NAME}"
         printf "       %${#THIS_FUNC_NAME}s [-t type] <-o output-file> <-x executable>\n\n" ""
         return 2
-        return 2
     }
 
     # Handle x flag -> executable to run
     if [ "$#" -eq 0 ]; then
         usage
+        return 2
     fi
 
     local OPTIND
@@ -93,7 +103,10 @@ function f_generate_file() {
             xflag=1
             EX_NAME=$OPTARG
             ;;
-        \?) usage ;;
+        \?)
+            usage
+            return 2
+            ;;
         esac
     done
     shift $((OPTIND - 1))
