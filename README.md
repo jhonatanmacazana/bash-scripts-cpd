@@ -12,8 +12,8 @@ A collection of simple Bash scripts.
 
 ```bash
 # i.e. save the repo on ~/.config/scripts
-mkdir -p ~/.config
-git clone https://github.com/jhonatanmacazana/bash-scripts-cpd ~/.config
+mkdir -p ~/.config/scripts
+git clone https://github.com/jhonatanmacazana/bash-scripts-cpd ~/.config/scripts
 ```
 
 3. open the shell configuration file (.bashrc | .zshrc) with the prefered editor (nano | vim)
@@ -32,7 +32,7 @@ if [ -f ~/.config/scripts/cluster/customFunctions.sh ]; then
 fi
 ```
 
-5. restart the session with `source ~/.bashrc`or ssh-out and ssh-in again
+5. restart the session with `source ~/.bashrc` or ssh-out and ssh-in again
 
 ## Usage
 
