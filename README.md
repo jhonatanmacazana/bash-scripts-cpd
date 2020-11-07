@@ -13,7 +13,7 @@ A collection of simple Bash scripts.
 ```bash
 # i.e. save the repo on ~/.config/scripts
 mkdir -p ~/.config
-git clone URL ~/.config
+git clone https://github.com/jhonatanmacazana/bash-scripts-cpd ~/.config
 ```
 
 3. open the shell configuration file (.bashrc | .zshrc) with the prefered editor (nano | vim)
