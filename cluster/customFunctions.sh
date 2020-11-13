@@ -162,15 +162,10 @@ function f_generate_file() {
 #SBATCH -p investigacion
 EOF
 
-    if [ $TYPE_PAR != 'MPI' ] && [ $TYPE_PAR != 'OMP' ] && [ $TYPE_PAR != 'ALL' ]; then
-        printf "Type (-t) must be MPI, OMP or ALL" >&2
-        return 1
-    fi
-
     case $TYPE_PAR in
     'MPI')
         cat >>$OUTPUT_FILE <<EOF
-#SBATCH -N $NUM_PRO
+#SBATCH --tasks-per-node=$NUM_PRO
 
 module load openmpi/2.1.6
 mpirun -np $NUM_PRO $EX_NAME
