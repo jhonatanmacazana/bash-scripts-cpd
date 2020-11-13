@@ -67,7 +67,6 @@ usage: f_generate_file [-j job-name] [-n number-proc]
 -   if `job-name` is not provided, it defaults to `CPD-test-$(date +"%T-%D")`
 -   if `number-proc` is not provided, it defaults to `4`
 -   if `type` is not provided, it defaults to `MPI`.
--   If no output-file provided, it will compile to `input-file.out`
 
 ## License
 
