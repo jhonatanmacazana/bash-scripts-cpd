@@ -1,5 +1,7 @@
 #!/bin/bash
 
+_THIS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
+
 function f_mpi_compile() {
     THIS_FUNC_NAME=${FUNCNAME[0]}
     case "$#" in
@@ -187,9 +189,9 @@ EOF
         cat >>$OUTPUT_FILE <<EOF
 #SBATCH -N $NUM_PRO
 
-module load openmpi/2.1.6 gcc/5.5.0
+module load gcc/5.5.0 openmpi/2.1.6
 mpirun -np $NUM_PRO $EX_NAME
-module unload openmpi/2.1.6 gcc/5.5.0
+module unload gcc/5.5.0 openmpi/2.1.6
 EOF
         ;;
     esac
@@ -207,5 +209,5 @@ alias l='ls -lah'
 alias la='ls -lAh'
 alias ll='ls -lh'
 alias brc='vim ~/.bashrc'
-# alias cfrc='vim ~/.customFunctions.sh'
-# alias cfu='source ~/.customFunctions.sh'
+alias sbrc='source ~/.bashrc'
+alias cfrc='vim $_THIS_DIR/customFunctions.sh'
